@@ -8,7 +8,7 @@ var _ = require('lodash');
 
 var program = require('commander');
 program.
-  version(require('./package').version).
+  version(require('../package').version).
   option('-s, --sync <hostname>', 'Sync with server').
   option('-r, --randomwrites', 'Produce random writes on local database').
   parse(process.argv);

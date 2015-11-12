@@ -22,8 +22,8 @@
     "json-duplex-stream": "^1.2.0",
     "lodash": "^3.10.1",
     "memdown": "^1.1.0",
-    "pouch-remote-stream": "^0.1.3",
-    "pouch-stream-server": "^0.1.3",
-    "pouchdb": "^4.0.3"
+    "pouch-remote-stream": "^0.2.0",
+    "pouch-stream-server": "^0.2.0",
+    "pouchdb": "^5.1.0"
   }
 }
