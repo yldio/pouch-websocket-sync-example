@@ -25,14 +25,6 @@ export default function configureStore() {
     });
 
     const sync = PouchDB.sync(db, remoteDB, {live: true});
-
-    ws.on('connect', function() {
-      console.log('websocket connected');
-    });
-    ws.on('data', function(d) {
-      console.log('websocket data:', d.toString());
-    });
-
     const json = JsonDuplexStream();
     ws.
       pipe(json.in).
@@ -41,7 +33,6 @@ export default function configureStore() {
       pipe(ws);
 
     ws.once('end', function() {
-      console.log('websocket ended');
       sync.cancel()
     });
   }).
@@ -49,7 +40,6 @@ export default function configureStore() {
     console.log(err);
   }).
   connect('ws://localhost:3001');
-
 
   const pouchMiddleware = PouchMiddleware({
     path: '/todos',
