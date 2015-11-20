@@ -7,6 +7,9 @@
     "pouch-stream-server": "server.js",
     "pouch-stream-client": "client.js"
   },
+  "scripts": {
+    "build": "browserify web/js/app.js > web/js/bundle.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pgte/pouch-stream-example.git"
@@ -18,12 +21,18 @@
   },
   "homepage": "https://github.com/pgte/pouch-stream-example#readme",
   "dependencies": {
+    "alt": "^0.17.3",
     "commander": "^2.9.0",
+    "director": "^1.2.0",
     "json-duplex-stream": "^1.2.0",
     "lodash": "^3.10.1",
     "memdown": "^1.1.0",
     "pouch-remote-stream": "^0.2.0",
     "pouch-stream-server": "^0.2.0",
-    "pouchdb": "^5.1.0"
+    "pouchdb": "^5.1.0",
+    "pouchflux": "0.0.14",
+    "react": "^0.13.3",
+    "todomvc-app-css": "^2.0.0",
+    "todomvc-common": "^1.0.1"
   }
 }
