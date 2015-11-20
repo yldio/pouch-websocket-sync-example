@@ -9,7 +9,6 @@ export default function Queue(maxConcurrency = 1) {
   return ee;
 
   function push(fn) {
-    console.log('pushing...', fn);
     q.push(fn);
     maybeFlush();
   }
