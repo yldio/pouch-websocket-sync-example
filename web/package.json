@@ -28,6 +28,7 @@
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",
+    "reconnect-core": "^1.1.0",
     "redux": "^3.0.0",
     "websocket-stream": "^2.1.0",
     "xtend": "^4.0.1"

@@ -6,26 +6,50 @@ import PouchDB from 'pouchdb'
 import PouchRemoteStream from 'pouch-remote-stream'
 import WebsocketStream from 'websocket-stream'
 import JsonDuplexStream from 'json-duplex-stream';
+import Reconnect from 'reconnect-core'
 
 PouchDB.adapter('remote', PouchRemoteStream.adapter);
 
 export default function configureStore() {
   var db = new PouchDB('todos');
-  var ws = WebsocketStream('ws://localhost:3001');
-  var remote = PouchRemoteStream();
-  var remoteDB = new PouchDB('todos-server', {
-    adapter: 'remote',
-    remote
+
+  var reconnect = Reconnect(function(address) {
+    return WebsocketStream(address);
   });
 
-  PouchDB.sync(db, remoteDB, {live: true});
+  var re = reconnect(function(ws) {
+    const remote = PouchRemoteStream();
+    const remoteDB = new PouchDB('todos-server', {
+      adapter: 'remote',
+      remote
+    });
 
-  var json = JsonDuplexStream();
-  ws.
-    pipe(json.in).
-    pipe(remote.stream).
-    pipe(json.out).
-    pipe(ws);
+    const sync = PouchDB.sync(db, remoteDB, {live: true});
+
+    ws.on('connect', function() {
+      console.log('websocket connected');
+    });
+    ws.on('data', function(d) {
+      console.log('websocket data:', d.toString());
+    });
+
+    const json = JsonDuplexStream();
+    ws.
+      pipe(json.in).
+      pipe(remote.stream).
+      pipe(json.out).
+      pipe(ws);
+
+    ws.once('end', function() {
+      console.log('websocket ended');
+      sync.cancel()
+    });
+  }).
+  on('error', function(err) {
+    console.log(err);
+  }).
+  connect('ws://localhost:3001');
+
 
   const pouchMiddleware = PouchMiddleware({
     path: '/todos',
