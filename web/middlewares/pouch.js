@@ -47,13 +47,16 @@ export default function createPouchMiddleware(_paths = []) {
   function processNewStateForPath(path, state) {
     var docs = jPath.resolve(state, path.path);
     if (docs && docs.length) {
-      let diffs = differences(path.docs, docs[0]);
-      diffs.new.concat(diffs.updated).forEach(doc => path.insert(doc))
-      diffs.deleted.forEach(doc => path.remove(doc));
+      docs.forEach(function(docs) {
+        let diffs = differences(path.docs, docs);
+        diffs.new.concat(diffs.updated).forEach(doc => path.insert(doc))
+        diffs.deleted.forEach(doc => path.remove(doc));
+      });
     }
   }
 
   function scheduleInsert(doc) {
+    this.docs[doc._id] = doc;
     var db = this.db;
     this.queue.push(function(cb) {
       db.put(doc, cb);
@@ -61,6 +64,7 @@ export default function createPouchMiddleware(_paths = []) {
   }
 
   function scheduleRemove(doc) {
+    delete this.docs[doc._id];
     var db = this.db;
     this.queue.push(function(cb) {
       db.remove(doc, cb);
