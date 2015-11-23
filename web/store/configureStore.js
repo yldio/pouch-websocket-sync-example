@@ -5,8 +5,8 @@ import rootReducer from '../reducers'
 import PouchDB from 'pouchdb'
 import PouchRemoteStream from 'pouch-remote-stream'
 import WebsocketStream from 'websocket-stream'
-import JsonDuplexStream from 'json-duplex-stream';
 import Reconnect from 'reconnect-core'
+import PipeChannels from 'pipe-channels'
 
 PouchDB.adapter('remote', PouchRemoteStream.adapter);
 
@@ -18,23 +18,27 @@ export default function configureStore() {
   });
 
   var re = reconnect(function(ws) {
-    const remote = PouchRemoteStream();
-    const remoteDB = new PouchDB('todos-server', {
-      adapter: 'remote',
-      remote
+
+    var client = PipeChannels.createClient();
+    ws.pipe(client).pipe(ws);
+
+    client.channel('todos-server', function(err, channel) {
+      if (err) throw err;
+
+      const remote = PouchRemoteStream();
+      const remoteDB = new PouchDB('todos-server', {
+        adapter: 'remote',
+        remote
+      });
+
+      const sync = PouchDB.sync(db, remoteDB, {live: true});
+      channel.pipe(remote.stream).pipe(channel);
+
+      channel.once('end', function() {
+        sync.cancel()
+      });
     });
 
-    const sync = PouchDB.sync(db, remoteDB, {live: true});
-    const json = JsonDuplexStream();
-    ws.
-      pipe(json.in).
-      pipe(remote.stream).
-      pipe(json.out).
-      pipe(ws);
-
-    ws.once('end', function() {
-      sync.cancel()
-    });
   }).
   on('error', function(err) {
     console.log(err);
