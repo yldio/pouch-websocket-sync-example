@@ -24,12 +24,12 @@ function handle(stream) {
       req.deny('database not allowed');
     } else {
       const channel = req.grant();
-      channel.once('error', warn);
+      channel.on('error', warn);
       channel.pipe(pouchServer.stream()).pipe(channel);
     }
   });
 
-  stream.once('error', warn);
+  stream.on('error', warn);
   stream.pipe(channelServer).pipe(stream);
 }
 
