@@ -1,39 +1,42 @@
 # pouch-websocket-sync-example
 
-Examples of using (pouch-stream-server)[https://github.com/pgte/pouch-stream-server#readme] and [pouch-remote-stream](https://github.com/pgte/pouch-remote-stream#readme).
+Example "Todo-MVC" application of using [`pouch-websocket-sync`](https://github.com/pgte/pouch-websocket-sync#readme) together with React and Redux, keeping local database in sync with remote.
 
-## Install
+## Pre-requisites
 
-To use these examples you should use git to clone this repo:
+You must have [Node.js](https://nodejs.org/en/) installed.
 
-```
-$ git clone git@github.com:pgte/pouch-stream-example.git
-$ cd pouch-stream-example
-```
+## Download
 
-## TCP example
-
-### 1. Start the TCP server:
+Clone this repo:
 
 ```
-$ net/server.js
-pouchdb stream server listening to {"address":"::","family":"IPv6","port":4321}
+$ git clone git@github.com:pgte/pouch-websocket-sync.git
+$ cd pouch-websocket-sync
 ```
 
-### 2. Start a client
-
-You can now start a client that syncs with the server and emits random writes:
+## Install dependencies:
 
 ```
-$ net/client.js -s localhost:4321 -r
+$ npm install
 ```
 
-The client should start doing local random writes that get synced ti the server
+## Start
 
-### 3. Start another client
-
-You can now start another client that will sync with the server:
+Start web server:
 
 ```
-$ net/client.js -s localhost:4321
+$ npm start
 ```
+
+Start websocket server:
+
+```
+$ node websocket-server
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browsers.
+
+## License
+
+ISC
