@@ -1,38 +1,51 @@
 {
-  "name": "pouch-stream-example",
-  "version": "0.1.0",
-  "description": "PouchDB stream example",
-  "main": "index.js",
-  "bin": {
-    "pouch-stream-server": "server.js",
-    "pouch-stream-client": "client.js"
-  },
+  "name": "pouch-websocket-sync-example",
+  "version": "0.0.0",
+  "description": "Redux, PouchDB and Sync TodoMVC example",
   "scripts": {
-    "build": "browserify web/js/app.js > web/js/bundle.js"
+    "start": "node server.js",
+    "test": "NODE_ENV=test mocha --recursive --compilers js:babel-core/register --require ./test/setup.js",
+    "test:watch": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pgte/pouch-stream-example.git"
+    "url": "https://github.com/pgte/pouch-websocket-sync-example.git"
   },
-  "author": "Pedro Teixeira <i@pgte.me>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pgte/pouch-stream-example/issues"
+    "url": "https://github.com/pgte/pouch-websocket-sync-example/issues"
   },
-  "homepage": "https://github.com/pgte/pouch-stream-example#readme",
+  "homepage": "https://github.com/pgte/pouch-websocket-sync-example",
   "dependencies": {
-    "alt": "^0.17.3",
-    "commander": "^2.9.0",
-    "director": "^1.2.0",
-    "json-duplex-stream": "^1.2.0",
-    "lodash": "^3.10.1",
-    "memdown": "^1.1.0",
-    "pouch-remote-stream": "^0.2.0",
-    "pouch-stream-server": "^0.2.0",
+    "classnames": "^2.1.2",
+    "deep-equal": "^1.0.1",
+    "json-path": "^0.1.3",
+    "pipe-channels": "^0.1.1",
+    "pouch-websocket-sync": "^0.1.5",
     "pouchdb": "^5.1.0",
-    "pouchflux": "0.0.14",
-    "react": "^0.13.3",
-    "todomvc-app-css": "^2.0.0",
-    "todomvc-common": "^1.0.1"
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0",
+    "react-redux": "^4.0.0",
+    "reconnect-core": "^1.1.0",
+    "redux": "^3.0.0",
+    "xtend": "^4.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^5.6.18",
+    "babel-loader": "^5.1.4",
+    "babel-plugin-react-transform": "^1.1.0",
+    "expect": "^1.8.0",
+    "express": "^4.13.3",
+    "jsdom": "^5.6.1",
+    "mocha": "^2.2.5",
+    "node-libs-browser": "^0.5.2",
+    "raw-loader": "^0.5.1",
+    "react-addons-test-utils": "^0.14.0",
+    "react-transform-hmr": "^1.0.0",
+    "style-loader": "^0.12.3",
+    "todomvc-app-css": "^2.0.1",
+    "webpack": "^1.9.11",
+    "webpack-dev-middleware": "^1.2.0",
+    "webpack-hot-middleware": "^2.2.0"
   }
 }

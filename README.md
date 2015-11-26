@@ -1,4 +1,4 @@
-# pouch-stream-example
+# pouch-websocket-sync-example
 
 Examples of using (pouch-stream-server)[https://github.com/pgte/pouch-stream-server#readme] and [pouch-remote-stream](https://github.com/pgte/pouch-remote-stream#readme).
 
