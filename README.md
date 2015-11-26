@@ -11,8 +11,8 @@ You must have [Node.js](https://nodejs.org/en/) installed.
 Clone this repo:
 
 ```
-$ git clone git@github.com:pgte/pouch-websocket-sync.git
-$ cd pouch-websocket-sync
+$ git clone git@github.com:pgte/pouch-websocket-sync-example.git
+$ cd pouch-websocket-sync-example
 ```
 
 ## Install dependencies:
