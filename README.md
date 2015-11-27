@@ -2,7 +2,7 @@
 
 Example "Todo-MVC" application of using [`pouch-websocket-sync`](https://github.com/pgte/pouch-websocket-sync#readme) together with React and Redux, keeping local database in sync with remote.
 
-[Video demo](https://www.youtube.com/watch?v=2UOfVFseksw)
+[demo video](http://www.youtube.com/watch?v=8jOF23dfvl4)
 
 ## Pre-requisites
 
