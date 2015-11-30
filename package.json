@@ -1,6 +1,6 @@
 {
   "name": "pouch-websocket-sync-example",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Redux, PouchDB and Sync TodoMVC example",
   "scripts": {
     "start": "node server.js",
